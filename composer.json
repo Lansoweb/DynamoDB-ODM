@@ -23,5 +23,5 @@
     "autoload": {
         "psr-0": { "Doctrine\\ODM\\DynamoDB": "lib/" }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "dev"
 }
