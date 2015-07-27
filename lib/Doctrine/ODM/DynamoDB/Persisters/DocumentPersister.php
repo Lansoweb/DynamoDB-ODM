@@ -434,6 +434,9 @@ class DocumentPersister
                 'id' => (new Marshaler())->marshalValue($criteria['id']),
             ]
         ]);
+        if (!isset($result['Item'])) {
+            return null;
+        }
         $item = (new Marshaler())->unmarshalItem($result['Item']);
         return $this->createDocument($item, $document, $hints);
 
