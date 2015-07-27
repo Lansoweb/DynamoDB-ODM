@@ -2819,14 +2819,13 @@ class UnitOfWork implements PropertyChangedListener
         if (isset($this->identityMap[$class->name][$serializedId])) {
             $document = $this->identityMap[$class->name][$serializedId];
             $oid = spl_object_hash($document);
+            $overrideLocalValues = true;
             if ($document instanceof Proxy && ! $document->__isInitialized__) {
                 $document->__isInitialized__ = true;
                 $overrideLocalValues = true;
                 if ($document instanceof NotifyPropertyChanged) {
                     $document->addPropertyChangedListener($this);
                 }
-            } else {
-                $overrideLocalValues = ! empty($hints[Query::HINT_REFRESH]);
             }
             if ($overrideLocalValues) {
                 $data = $this->hydratorFactory->hydrate($document, $data, $hints);

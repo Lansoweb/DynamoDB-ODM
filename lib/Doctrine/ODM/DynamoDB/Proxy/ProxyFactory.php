@@ -179,7 +179,8 @@ class ProxyFactory extends AbstractProxyFactory
             $id = $reflectionId->getValue($proxy);
 
             if (null === $documentPersister->load(array('id' => $id), $proxy)) {
-                throw DocumentNotFoundException::documentNotFound(get_class($proxy), $id);
+                //throw DocumentNotFoundException::documentNotFound(get_class($proxy), $id);
+                return new $proxy;
             }
 
             if ($proxy instanceof NotifyPropertyChanged) {
