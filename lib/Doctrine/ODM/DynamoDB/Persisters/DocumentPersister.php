@@ -419,9 +419,12 @@ class DocumentPersister
     public function load($criteria, $document = null, array $hints = array(), $lockMode = 0, array $sort = null)
     {
         if ($criteria === null || is_scalar($criteria)) {
-            $criteria = array('id' => $criteria);
+            $criteria = array('id' => (int)$criteria);
         }
 
+        if (is_numeric($criteria['id'])) {
+            $criteria['id'] = (int)$criteria['id'];
+        }
         /*$criteria = $this->prepareQueryOrNewObj($criteria);
         $criteria = $this->addDiscriminatorToPreparedQuery($criteria);
         $criteria = $this->addFilterToPreparedQuery($criteria);
